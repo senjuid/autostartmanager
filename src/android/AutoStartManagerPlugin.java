@@ -25,6 +25,6 @@ public class AutoStartManagerPlugin extends CordovaPlugin {
 
     private void showStartManager() {
         Context context = this.cordova.getActivity().getApplicationContext();
-        new cordova.plugin.logiclinkplugin.AutoStartPermissionHelper().getAutoStartPermission(context);
+        new AutoStartPermissionHelper().getAutoStartPermission(context);
     }
 }
