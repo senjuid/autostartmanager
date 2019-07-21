@@ -12,5 +12,6 @@
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml"></config-file>
         <source-file src="src/android/AutoStartManagerPlugin.java" target-dir="src/com/dataon/cordova/plugin/autostartmanager" />
+        <source-file src="src/android/AutoStartPermissionHelper.java" target-dir="src/com/dataon/cordova/plugin/autostartmanager" />
     </platform>
 </plugin>
