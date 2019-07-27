@@ -2,7 +2,7 @@
 <plugin id="cordova-plugin-dataon-autostartmanager" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>AutoStartManagerPlugin</name>
     <js-module name="AutoStartManagerPlugin" src="www/AutoStartManagerPlugin.js">
-        <clobbers target="AutoStartManagerPlugin" />
+        <clobbers target="autostartmanager" />
     </js-module>
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
