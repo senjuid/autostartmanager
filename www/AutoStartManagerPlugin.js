@@ -1,5 +1,10 @@
 var exec = require('cordova/exec');
 
-exports.showStartManager = function (success, error) {
-  exec(success, error, 'AutoStartManagerPlugin', 'showStartManager', []);
-};
+module.exports = {
+  showStartManager = function (success, error) {
+    exec(success, error, 'AutoStartManagerPlugin', 'showStartManager', []);
+  },
+  checkAutomaticDateTimeZone = function (success, error) {
+    exec(success, error, 'AutoStartManagerPlugin', 'checkAutomaticDateTimeZone', []);
+  }
+}
