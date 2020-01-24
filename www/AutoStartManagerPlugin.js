@@ -4,7 +4,7 @@ module.exports = {
   showStartManager = function (success, error) {
     exec(success, error, 'AutoStartManagerPlugin', 'showStartManager', []);
   },
-  checkAutomaticDateTimeZone = function (success, error) {
-    exec(success, error, 'AutoStartManagerPlugin', 'checkAutomaticDateTimeZone', []);
+  checkAutomaticDateTimeZone = function (success) {
+    exec(success, null, 'AutoStartManagerPlugin', 'checkAutomaticDateTimeZone', []);
   }
 }
