@@ -2,6 +2,7 @@ package com.dataon.cordova.plugin.autostartmanager;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaInterface;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,27 +33,38 @@ public class AutoStartManagerPlugin extends CordovaPlugin {
                 boolean result = this.isAutomaticChecked();
 
                 Context context = this.cordova.getActivity().getApplicationContext();
+                final CordovaInterface cordova = this.cordova;
 
                 if(!result) {
-                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                    AlertDialog alertDialog = new AlertDialog.Builder(cordova.getActivity()).create();
                     alertDialog.setTitle("Enable Automatic Date Time");
-                    alertDialog.setMessage("Your Automatic Date Time Or Time Zone Settings is set to 'Off'.\nPlease Enable to use this app");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Automatic Date Time Settings",
+                    alertDialog.setCancelable(false);
+                    alertDialog.setMessage("Your Automatic Date Time or Time Zone Settings is set to 'Off'.\nPlease Enable to use this feature");
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Show Settings",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     context.startActivity(new Intent(android.provider.Settings.ACTION_DATE_SETTINGS));
                                     dialog.dismiss();
+
+                                    try {
+                                        json.put(0, false);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    callbackContext.success(json);
                                 }
                             });
                     alertDialog.show();
+                } else {
+                    json.put(0, true);
+                    callbackContext.success(json);
                 }
-
-                json.put(0, result);
             } catch (Settings.SettingNotFoundException e) {
                 json.put(0, "SettingNotFoundException");
+                callbackContext.success(json);
             }
 
-            callbackContext.success(json);
+            return true;
         }
         return false;
     }
@@ -92,4 +104,5 @@ public class AutoStartManagerPlugin extends CordovaPlugin {
             return true;
         }
     }
+
 }
