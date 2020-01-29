@@ -43,7 +43,9 @@ public class AutoStartManagerPlugin extends CordovaPlugin {
                     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Show Settings",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    context.startActivity(new Intent(android.provider.Settings.ACTION_DATE_SETTINGS));
+                                    Intent i = new Intent(android.provider.Settings.ACTION_DATE_SETTINGS);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    context.startActivity(i);
                                     dialog.dismiss();
 
                                     try {
