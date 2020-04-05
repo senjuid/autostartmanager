@@ -9,6 +9,7 @@ import org.json.JSONException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.os.Build;
 import android.app.AlertDialog;
@@ -20,6 +21,8 @@ import android.content.Intent;
  * This class echoes a string called from JavaScript.
  */
 public class AutoStartManagerPlugin extends CordovaPlugin {
+
+    PackageManager pm;
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -67,6 +70,16 @@ public class AutoStartManagerPlugin extends CordovaPlugin {
             }
 
             return true;
+        } else if (action.equals("checkCamera")) {
+          JSONArray json = new JSONArray();
+          Context context = this.cordova.getActivity().getApplicationContext();
+          pm = context.getPackageManager();
+          if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
+            json.put(0, true);
+          } else {
+            json.put(0, false);
+          }
+          callbackContext.success(json);
         }
         return false;
     }
